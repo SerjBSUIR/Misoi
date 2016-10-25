@@ -58,7 +58,7 @@ namespace lab1
         {
             Bitmap result = new Bitmap(bitmap);
             int width = bitmap.Width;
-            int height = bitmap.Height;
+            int height = bitmap.Height;  
             int fMin = 500;
             int fMax = 0;
             double NewR;
@@ -94,14 +94,17 @@ namespace lab1
                     NewB = ((NewB - fMin) / (fMax - fMin)) * (gMax - gMin) + gMin;
 
                     if ((int)NewR < 0)
+
                         NewR = 0.0;
                     if ((int)NewR > 255)
                         NewR = 255.0;
                     if ((int)NewG < 0)
+
                         NewG = 0.0;
                     if ((int)NewG > 255)
                         NewG = 255.0;
                     if ((int)NewB < 0)
+
                         NewB = 0.0;
                     if ((int)NewB > 255)
                         NewB = 255.0;
@@ -122,15 +125,20 @@ namespace lab1
         {
             Bitmap result = new Bitmap(bitmap);
             int width = bitmap.Width;
+
             int height = bitmap.Height;
             int fMin = 500;
+
             int fMax = 0;
             for (int x = 0; x < width; x++)
+
             {
                 for (int y = 0; y < height; y++)
                 {
+
                     int averageBrightness = bitmap.GetPixel(x, y).R;//GetAverageBrightness(bitmap, x, y);
                     if (averageBrightness > fMax)
+
                         fMax = averageBrightness;
                     if (averageBrightness < fMin)
                         fMin = averageBrightness;
@@ -140,9 +148,11 @@ namespace lab1
             for (int x = 0; x < width; x++)
             {
                 for (int y = 0; y < height; y++)
+
                 {
                     double averageBrightness = bitmap.GetPixel(x, y).R;//GetAverageBrightness(bitmap, x, y);
                     averageBrightness = ((averageBrightness - fMin) / (fMax - fMin)) * (gMax - gMin) + gMin;
+
                     SetAverageBrightness(result, x, y, (int)averageBrightness);
 
                 }
@@ -163,16 +173,19 @@ namespace lab1
             {
                 for (int y = 1; y < height-1; y++)
                 {
-                    //int averageBrightness = GetAverageBrightness(bitmap, x, y);
+                    //int averageBrightness = GetAverageBrightness(bitmap, x, y); \\гаус отсто робертс медиана
                     //SetAverageBrightness(result, x, y, averageBrightness);
-
+                     
                     NewR = bitmap.GetPixel(x, y).R;
+
                     NewR = (bitmap.GetPixel(x - 1, y - 1).R + bitmap.GetPixel(x, y - 1).R + bitmap.GetPixel(x + 1, y - 1).R + bitmap.GetPixel(x - 1, y).R + bitmap.GetPixel(x, y).R + bitmap.GetPixel(x + 1, y).R + bitmap.GetPixel(x - 1, y + 1).R + bitmap.GetPixel(x, y + 1).R + bitmap.GetPixel(x + 1, y + 1).R) / 9;
 
                     NewG = bitmap.GetPixel(x, y).G;
+
                     NewG = (bitmap.GetPixel(x - 1, y - 1).G + bitmap.GetPixel(x, y - 1).G + bitmap.GetPixel(x + 1, y - 1).G + bitmap.GetPixel(x - 1, y).G + bitmap.GetPixel(x, y).G + bitmap.GetPixel(x + 1, y).G + bitmap.GetPixel(x - 1, y + 1).G + bitmap.GetPixel(x, y + 1).G + bitmap.GetPixel(x + 1, y + 1).G) / 9;
 
                     NewB = bitmap.GetPixel(x, y).B;
+
                     NewB = (bitmap.GetPixel(x - 1, y - 1).B + bitmap.GetPixel(x, y - 1).B + bitmap.GetPixel(x + 1, y - 1).B + bitmap.GetPixel(x - 1, y).B + bitmap.GetPixel(x, y).B + bitmap.GetPixel(x + 1, y).B + bitmap.GetPixel(x - 1, y + 1).B + bitmap.GetPixel(x, y + 1).B + bitmap.GetPixel(x + 1, y + 1).B) / 9;
 
                     result.SetPixel(x, y, Color.FromArgb(NewR, NewG, NewB));
@@ -189,14 +202,14 @@ namespace lab1
             int width = bitmap.Width;
             int height = bitmap.Height;
           
-
+             
             for (int x = 1; x < width - 1; x++)
             {
                 for (int y = 1; y < height - 1; y++)
                 {
                     int averageBrightness = GetAverageBrightness(bitmap, x, y);
                     averageBrightness = (GetAverageBrightness(bitmap, x - 1, y - 1) + GetAverageBrightness(bitmap, x, y - 1) + GetAverageBrightness(bitmap, x + 1, y - 1) + GetAverageBrightness(bitmap, x - 1, y) + GetAverageBrightness(bitmap, x, y) + GetAverageBrightness(bitmap, x + 1, y) + GetAverageBrightness(bitmap, x - 1, y + 1) + GetAverageBrightness(bitmap, x, y + 1) + GetAverageBrightness(bitmap, x + 1, y + 1)) / 9;
-                    SetAverageBrightness(result, x, y, averageBrightness);
+                    SetAverageBrightness(result, x, y, averageBrightness); 
 
                     //NewR = bitmap.GetPixel(x, y).R;
                     //NewR = (bitmap.GetPixel(x - 1, y - 1).R + bitmap.GetPixel(x, y - 1).R + bitmap.GetPixel(x + 1, y - 1).R + bitmap.GetPixel(x - 1, y).R + bitmap.GetPixel(x, y).R + bitmap.GetPixel(x + 1, y).R + bitmap.GetPixel(x - 1, y + 1).R + bitmap.GetPixel(x, y + 1).R + bitmap.GetPixel(x + 1, y + 1).R) / 9;
